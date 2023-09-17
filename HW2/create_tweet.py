@@ -43,6 +43,7 @@ class Tweet:
 
         try:
             response = requests.delete(url, headers=headers)
+            ## add line to check that tweet is deleted
          else:
             print("Deleting tweet failed")
 
