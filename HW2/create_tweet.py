@@ -32,6 +32,19 @@ class Tweet:
     
         return json.loads(response.text)["data"]["id"]
 
+    def delete_tweet(tweet_id):
+        url = "https://api.twitter.com/2/tweets/{tweet_id}"
+
+        headers = {
+            "authorization": "OAuth oauth_consumer_key=lgIy5gxSn8YW5lxhh3YCNPT00, oauth_token=1703147532623413248-E3oLFyQlnTTOwydlaTvZsEJvBPLRFn, oauth_nonce=VkMwenZITmwwbWZoTU1GVmpOWXpBd3pCV0tuSjZ3MWQ%3D, oauth_signature_method=HMAC-SHA1, oauth_version=1.0, oauth_timestamp=1694930514, oauth_signature=1Gmj%2B5C3Zkk4ITxBPYwJDPfaCKU%3D",
+            "content-type": "application/json",
+            "host": "api.twitter.com",
+        }
+
+        try:
+            response = requests.delete(url, headers=headers)
+         else:
+            print("Deleting tweet failed")
 
     #print(create_tweet("test_5"))
 
