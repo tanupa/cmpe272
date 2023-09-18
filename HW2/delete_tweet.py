@@ -7,6 +7,7 @@ import requests
 from requests_oauthlib import OAuth1Session
 import json
 
+# Written by Ben Kwon.
 class DeleteTweet:
   def delete(id):
     oauth = OAuth1Session(
@@ -18,6 +19,7 @@ class DeleteTweet:
 
     response = oauth.delete(f"https://api.twitter.com/2/tweets/{id}")
 
+  # Written by Tanupa Thaker.
   def test_delete_tweet(self):
     tweet_id_to_delete = "insert number here"
     deleting_tweet_id = DeleteTweet.deleting_tweet(tweet_id_to_delete)
