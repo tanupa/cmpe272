@@ -1,44 +1,55 @@
 # Written by Ben Kwon.
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Twitter Web UI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Twitter Web UI</title>
 </head>
 <body>
-  <div id="Create Tweet">
+<div id="Create Tweet">
     <label for="NewTweet">Tweet:</label>
     <input type="text" id="NewTweet" placeholder="Tweet here">
-    <button >Tweet!</button>
-  </div>
+    <button>Tweet!</button>
+</div>
 
-  <div id="TweetList">
+<div id="TweetList">
     <ul id="AllTweets">
     </ul>
-  </div>
+</div>
 
-  # Written by Tanupa Thaker.
- <script>
+<!-- Written by Tanupa Thaker. -->
+<script>
     async function createTweet() {
-      const tweetContent = document.getElementById('NewTweet').value;
+        const tweetContent = document.getElementById('NewTweet').value;
 
-      const response = await fetch(`http://localhost:5000/create-tweet/${encodeURIComponent(tweetContent)}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+        const response = await fetch(`http://localhost:5000/create-tweet/${encodeURIComponent(tweetContent)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const tweetData = await response.json();
+            const allTweets = document.getElementById('AllTweets');
+            const newTweet = document.createElement('li');
+            newTweet.textContent = tweetData.text;
+            allTweets.appendChild(newTweet);
         }
-      });
-
-      if (response.ok) {
-        const tweetData = await response.json();
-        const allTweets = document.getElementById('AllTweets');
-        const newTweet = document.createElement('li');
-        newTweet.textContent = tweetData.text;
-        allTweets.appendChild(newTweet);
-      }
     }
 
-    
-  </script>
+    async function deleteTweet(tweetId) {
+        const response = await fetch(`http://localhost:5000/delete-tweet/${tweetId}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            const tweetElement = document.getElementById(`tweet_${tweetId}`);
+            if (tweetElement) {
+                tweetElement.remove();
+            }
+        }
+    }
+</script>
 </body>
 </html>
