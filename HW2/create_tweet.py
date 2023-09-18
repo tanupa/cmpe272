@@ -19,7 +19,7 @@ class Tweet:
         url = "https://api.twitter.com/2/tweets"
 
         payload = json.dumps({
-        "text": message
+            "text": message
         })
     
         headers ={
@@ -32,22 +32,6 @@ class Tweet:
     
         return json.loads(response.text)["data"]["id"]
 
-    def delete_tweet(tweet_id):
-        url = "https://api.twitter.com/2/tweets/{tweet_id}"
-
-        headers = {
-            "authorization": "OAuth oauth_consumer_key=lgIy5gxSn8YW5lxhh3YCNPT00, oauth_token=1703147532623413248-E3oLFyQlnTTOwydlaTvZsEJvBPLRFn, oauth_nonce=VkMwenZITmwwbWZoTU1GVmpOWXpBd3pCV0tuSjZ3MWQ%3D, oauth_signature_method=HMAC-SHA1, oauth_version=1.0, oauth_timestamp=1694930514, oauth_signature=1Gmj%2B5C3Zkk4ITxBPYwJDPfaCKU%3D",
-            "content-type": "application/json",
-            "host": "api.twitter.com",
-        }
-
-        try:
-            response = requests.delete(url, headers=headers)
-            ## add line to check that tweet is deleted
-         else:
-            print("Deleting tweet failed")
-
-    #print(create_tweet("test_5"))
 
 class TestTweet(unittest.TestCase):
     def test_create_tweet(self):
@@ -55,10 +39,6 @@ class TestTweet(unittest.TestCase):
         tweet_id = Tweet.create_tweet(message)
         self.assertIsNotNone(tweet_id, "Tweet creation failed")
 
-    def test_delete_tweet(self):
-        tweet_id_to_delete = "insert number here"
-        deleting_tweet_id = Tweet.deleting_tweet(tweet_id_to_delete)
-        self.assertEqual(deleting_tweet_id, tweet_id_to_delete, "Tweet deletion failed")
 
 
 # import requests
