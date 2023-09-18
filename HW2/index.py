@@ -1,3 +1,4 @@
+#Done by Ben Kwon - delete-tweet and Flask back-end
 from flask import Flask
 
 app = Flask(__name__)
@@ -11,7 +12,7 @@ import requests
 from requests_oauthlib import OAuth1Session
 import json
 
-@app.route('/create-tweet/<text>')
+@app.route('/create-tweet/<text>', methods=["POST"])
 def create_tweet(text):
 
   oauth = OAuth1Session(
@@ -32,7 +33,7 @@ def create_tweet(text):
   if "data" in resJson:
     return resJson, 202
 
-@app.route('/delete-tweet/<id>')
+@app.route('/delete-tweet/<id>', methods=["DELETE"])
 def delete_tweet(id):
   oauth = OAuth1Session(
   client_key=consumer_key,
