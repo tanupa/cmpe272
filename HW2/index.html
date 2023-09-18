@@ -35,8 +35,12 @@
             const allTweets = document.getElementById('AllTweets');
             const newTweet = document.createElement('li');
             newTweet.textContent = tweetData.text;
-            allTweets.appendChild(newTweet);
 
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => deleteTweet(tweetId);
+            newTweet.appendChild(deleteButton);
+            allTweets.appendChild(newTweet);
 
         }
     }
