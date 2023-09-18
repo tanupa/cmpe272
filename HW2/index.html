@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Twitter Web UI</title>
+</head>
+<body>
+  <div id="Create Tweet">
+    <label for="NewTweet">Tweet:</label>
+    <input type="text" id="NewTweet" placeholder="Tweet here">
+    <button >Tweet!</button>
+  </div>
+
+  <div id="TweetList">
+    <ul id="AllTweets">
+    </ul>
+  </div>
+
+ <script>
+    async function createTweet() {
+      const tweetContent = document.getElementById('NewTweet').value;
+
+      const response = await fetch(`http://localhost:5000/create-tweet/${encodeURIComponent(tweetContent)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const tweetData = await response.json();
+        const allTweets = document.getElementById('AllTweets');
+        const newTweet = document.createElement('li');
+        newTweet.textContent = tweetData.text;
+        allTweets.appendChild(newTweet);
+      }
+    }
+  </script>
+</body>
+</html>
