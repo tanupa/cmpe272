@@ -9,7 +9,7 @@
 <div id="Create Tweet">
     <label for="NewTweet">Tweet:</label>
     <input type="text" id="NewTweet" placeholder="Tweet here">
-    <button>Tweet!</button>
+     <button onclick="createTweet()">Tweet!</button>
 </div>
 
 <div id="TweetList">
@@ -31,10 +31,13 @@
 
         if (response.ok) {
             const tweetData = await response.json();
+            const tweetId = tweetData.id;
             const allTweets = document.getElementById('AllTweets');
             const newTweet = document.createElement('li');
             newTweet.textContent = tweetData.text;
             allTweets.appendChild(newTweet);
+
+
         }
     }
 
